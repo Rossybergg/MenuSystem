@@ -108,6 +108,16 @@ void UMenu::OnFindSessions(const TArray<FOnlineSessionSearchResult>& SessionResu
 		FString SettingsValue;
 		Result.Session.SessionSettings.Get(FName("MatchType"),SettingsValue);
 		if (SettingsValue == MatchType) {
+
+			if (GEngine) {
+				GEngine->AddOnScreenDebugMessage(
+					-1,
+					15.f,
+					FColor::Blue,
+					FString(TEXT("Found Session Now Joining"))
+				);
+			}
+
 			MultiplayerSessionsSubsystem->JoinSession(Result);
 			return;
 		}
@@ -128,6 +138,7 @@ void UMenu::onJoinSession(EOnJoinSessionCompleteResult::Type Result)
 
 			if (PlayerController) {
 				PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+
 			}
 		}
 	}
