@@ -8,6 +8,12 @@
 
 #include "MultiplayerSessionsSubsystem.generated.h"
 
+///
+/// Declaring our own delegates for the menu class to bind callbacks to
+/// 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful);
+
 /**
  * 
  */
@@ -31,6 +37,12 @@ public:
 	void DestroySession();
 
 	void StartSession();
+
+	//
+	// Our Own custom delegates for the menu class to bind callbacks to
+	//
+
+	FMultiplayerOnCreateSessionComplete MultiplayerOnCreateSessionComplete;
 
 
 protected:

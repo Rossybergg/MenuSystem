@@ -23,6 +23,13 @@ protected:
 	virtual bool Initialize() override;
 	virtual void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
 
+	//
+	// callbacks for the custom delegates on the MultiplayerSessionsSubsytem
+	//
+
+	UFUNCTION()
+	void OnCreateSession(bool bWasSuccessful);
+
 
 private:
 
