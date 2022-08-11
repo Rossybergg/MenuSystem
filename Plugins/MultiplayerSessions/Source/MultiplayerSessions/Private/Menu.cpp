@@ -47,6 +47,12 @@ bool UMenu::Initialize()
 	return true;
 }
 
+void UMenu::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld)
+{
+	MenuTearDown();
+	Super::OnLevelRemovedFromWorld(InLevel, InWorld);
+}
+
 void UMenu::HostButtonClicked()
 {
 	if (GEngine) {
@@ -60,6 +66,12 @@ void UMenu::HostButtonClicked()
 
 	if (MultiplayerSessionsSubsystem) {
 		MultiplayerSessionsSubsystem->CreateSession(4, FString("FreeForAll"));
+		UWorld* World = GetWorld();
+
+		if (World) {
+			World->ServerTravel("/Game/ThirdPerson/Maps/Lobby?listen");
+		}
+
 	}
 }
 
@@ -72,5 +84,21 @@ void UMenu::JoinButtonClicked()
 			FColor::Yellow,
 			FString(TEXT("Join Button Clicked"))
 		);
+	}
+}
+
+void UMenu::MenuTearDown()
+{
+	RemoveFromParent();
+	UWorld* World = GetWorld();
+
+	if (World) {
+		APlayerController* PlayerController = World->GetFirstPlayerController();
+
+		if (PlayerController) {
+			FInputModeGameOnly InputModeData;
+			PlayerController->SetInputMode(InputModeData);
+			PlayerController->SetShowMouseCursor(false);
+		}
 	}
 }
