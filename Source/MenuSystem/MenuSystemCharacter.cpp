@@ -58,6 +58,7 @@ AMenuSystemCharacter::AMenuSystemCharacter() :
 
 	IOnlineSubsystem* OnlineSubsystem = IOnlineSubsystem::Get();
 
+	/*
 	if (OnlineSubsystem) {
 		OnlineSessionInterface = OnlineSubsystem->GetSessionInterface();
 
@@ -69,6 +70,7 @@ AMenuSystemCharacter::AMenuSystemCharacter() :
 				FString::Printf(TEXT("Succsessfully connected to %s network"), *OnlineSubsystem->GetSubsystemName().ToString()));
 		}
 	}
+	*/
 }
 
 //////////////////////////////////////////////////////////////////////////
